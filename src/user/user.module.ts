@@ -9,5 +9,6 @@ import { UserEntity } from "./entities/user.entity";
     imports: [HichchiCrudModule.forFeature([UserEntity])],
     controllers: [UserController],
     providers: [UserRepository, UserService],
+    exports: [HichchiCrudModule, UserRepository, UserService],
 })
 export class UserModule {}
