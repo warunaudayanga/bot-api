@@ -9,7 +9,7 @@ dotenv.config();
 // noinspection JSUnusedGlobalSymbols
 export default () => ({
     app: {
-        port: Number(process.env.APP_PORT || process.env.PORT) || 3000,
+        port: Number(process.env.PORT || process.env.PORT) || 3000,
         allowedOrigins: String(process.env.APP_ALLOWED_ORIGINS).split(",") || [],
         webUrl: process.env.APP_WEB_URL || "http://localhost:4200",
         environment: process.env.NODE_ENV || "development",
