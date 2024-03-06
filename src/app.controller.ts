@@ -25,7 +25,7 @@ export class AppController {
 
     @Get()
     getHello(): string {
-        return "Hello, welcome to the Bob API!";
+        return "Hello, welcome to the Bot API!";
     }
 
     @Get("product")
