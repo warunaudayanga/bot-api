@@ -9,35 +9,11 @@ import configuration from "./core/config/configuration";
 import { UserService } from "./user/services/user.service";
 import { RegisterUserDto } from "./user/dto/register-user.dto";
 import { AuthField } from "hichchi-nestjs-auth/auth/enums/auth-by.enum";
-import { join } from "path";
-import { MailerModule } from "@nestjs-modules/mailer";
-import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handlebars.adapter";
+import { SalesModule } from "./sales/sales.module";
+import { EmailModule } from "./email/email.module";
 
 @Module({
     imports: [
-        MailerModule.forRoot({
-            transport: {
-                host: configuration().smtp.host,
-                port: configuration().smtp.port,
-                secure: configuration().smtp.secure,
-                ignoreTLS: configuration().smtp.ignoreTLS,
-                auth: {
-                    user: configuration().smtp.user,
-                    pass: configuration().smtp.pass,
-                },
-            },
-            defaults: {
-                from: `"Bot" <${configuration().smtp.from}>`,
-            },
-            template: {
-                dir: join(__dirname + "/modules/common/templates"),
-                adapter: new HandlebarsAdapter(),
-                options: {
-                    strict: true,
-                },
-            },
-            preview: true,
-        }),
         HichchiCrudModule.forRoot(typeOrmOptions),
         HichchiAuthModule.registerAsync(
             { imports: [UserModule], useExisting: UserService },
@@ -49,6 +25,7 @@ import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handleba
             },
         ),
         UserModule,
+        SalesModule,
     ],
     controllers: [AppController],
     providers: [AppService],
