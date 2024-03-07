@@ -5,33 +5,40 @@ import { join } from "path";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handlebars.adapter";
 import { EmailService } from "./services/email.service";
 
-const getSmtpTransport = (): string => {
-    return `smtp://${configuration().smtp.user}:${configuration().smtp.pass}@${configuration().smtp.host}`;
-};
-
 @Module({
     imports: [
-        MailerModule.forRoot({
-            transport: getSmtpTransport(),
-            defaults: {
-                from: `"Bot" <${configuration().smtp.from}>`,
-            },
-            template: {
-                dir: join(__dirname, "templates/pages"),
-                adapter: new HandlebarsAdapter(),
-                options: {
-                    strict: true,
+        MailerModule.forRootAsync({
+            useFactory: () => ({
+                transport: {
+                    host: configuration().smtp.host,
+                    port: configuration().smtp.port,
+                    secure: configuration().smtp.secure,
+                    ignoreTLS: configuration().smtp.ignoreTLS,
+                    auth: {
+                        user: configuration().smtp.user,
+                        pass: configuration().smtp.pass,
+                    },
                 },
-            },
-            options: {
-                partials: {
-                    dir: join(__dirname, "templates/partials"),
+                defaults: {
+                    from: `"Bot" <${configuration().smtp.from}>`,
+                },
+                template: {
+                    dir: join(__dirname, "templates/pages"),
+                    adapter: new HandlebarsAdapter(),
                     options: {
                         strict: true,
                     },
                 },
-            },
-            preview: true,
+                options: {
+                    partials: {
+                        dir: join(__dirname, "templates/partials"),
+                        options: {
+                            strict: true,
+                        },
+                    },
+                },
+                preview: true,
+            }),
         }),
     ],
     providers: [EmailService],
