@@ -8,7 +8,6 @@ export class SalesController {
 
     @Post("contact")
     async contact(@Body() salesContactDto: SalesContactDto) {
-        console.log(salesContactDto);
         return await this.salesService.contact(salesContactDto);
     }
 }

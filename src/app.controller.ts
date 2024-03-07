@@ -5,7 +5,7 @@ import { Response } from "express";
 export class AppController {
     @Get()
     keepAlive(@Res() res: Response): void {
-        console.log("Stay alive!");
+        console.log("Staying alive!");
         res.status(HttpStatus.OK).send();
     }
 }

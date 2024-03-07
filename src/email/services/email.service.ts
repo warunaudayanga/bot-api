@@ -17,8 +17,7 @@ export class EmailService {
                 },
             });
             return true;
-        } catch (err) {
-            console.log(err);
+        } catch {
             throw new InternalServerErrorException();
         }
     }

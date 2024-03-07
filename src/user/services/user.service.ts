@@ -14,7 +14,6 @@ export class UserService extends CrudService<UserEntity> implements IUserService
     }
 
     createUser(userDto: RegisterUserDto): Promise<IUserEntity> {
-        console.log(userDto);
         return super.save(userDto);
     }
 
