@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
 import { MailerService } from "@nestjs-modules/mailer";
 import { SalesContactDto } from "../../sales/dto/sales-contact.dto";
 
@@ -17,7 +17,8 @@ export class EmailService {
                 },
             });
             return true;
-        } catch {
+        } catch (err) {
+            Logger.log(err);
             throw new InternalServerErrorException();
         }
     }
