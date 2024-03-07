@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserRepository } from "../repositories/user.repository";
 import { IUserService } from "hichchi-nestjs-auth";
 import { IUserEntity } from "hichchi-nestjs-common/interfaces";
+import { RegisterUserDto } from "../dto/register-user.dto";
 
 @Injectable()
 export class UserService extends CrudService<UserEntity> implements IUserService {
@@ -12,7 +13,8 @@ export class UserService extends CrudService<UserEntity> implements IUserService
         super(userRepository, "user", "email");
     }
 
-    createUser(userDto: Partial<IUserEntity>): Promise<IUserEntity> {
+    createUser(userDto: RegisterUserDto): Promise<IUserEntity> {
+        console.log(userDto);
         return super.save(userDto);
     }
 
