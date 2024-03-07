@@ -6,7 +6,7 @@ import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handleba
 import { EmailService } from "./services/email.service";
 
 const getSmtpTransport = (): string => {
-    return `smtps://${configuration().smtp.user}:${configuration().smtp.pass}@${configuration().smtp.host}`;
+    return `smtp://${configuration().smtp.user}:${configuration().smtp.pass}@${configuration().smtp.host}`;
 };
 
 @Module({
