@@ -10,7 +10,8 @@ import { UserService } from "./user/services/user.service";
 import { RegisterUserDto } from "./user/dto/register-user.dto";
 import { AuthField } from "hichchi-nestjs-auth/auth/enums/auth-by.enum";
 import { SalesModule } from "./sales/sales.module";
-import { EmailModule } from "./email/email.module";
+import { BotModule } from "./bot/bot.module";
+import { TravelAssistModule } from "./travel-assist/travel-assist.module";
 
 @Module({
     imports: [
@@ -26,6 +27,8 @@ import { EmailModule } from "./email/email.module";
         ),
         UserModule,
         SalesModule,
+        BotModule,
+        TravelAssistModule,
     ],
     controllers: [AppController],
     providers: [AppService],
