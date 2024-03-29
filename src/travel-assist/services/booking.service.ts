@@ -12,11 +12,12 @@ export class BookingService extends CrudService<BookingEntity> {
         super(bookingRepository, "booking");
     }
 
-    async updateBooking(botId: string, id: string, updateBookingDto: UpdateBookingDto): Promise<IStatusResponse> {
-        if (await this.getOne({ where: { botId, id } })) return await this.updateOne({ botId, id }, updateBookingDto);
+    async updateBooking(botId: string, phone: string, updateBookingDto: UpdateBookingDto): Promise<IStatusResponse> {
+        if (await this.getOne({ where: { botId, phone } }))
+            return await this.updateOne({ botId, phone }, updateBookingDto);
     }
 
-    async deleteBooking(botId: string, id: string) {
-        if (await this.getOne({ where: { botId, id } })) return await this.delete(id);
+    async deleteBooking(botId: string, phone: string) {
+        if (await this.getOne({ where: { botId, phone } })) return await this.delete(phone);
     }
 }

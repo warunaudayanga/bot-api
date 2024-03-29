@@ -13,10 +13,10 @@ export class BookingController {
         return await this.bookingService.getMany({ where: { botId } });
     }
 
-    @Get(":botId/:id")
+    @Get(":botId/:phone")
     @HttpCode(HttpStatus.OK)
-    async getBookingById(@Param("botId") botId: string, @Param("id") id: string) {
-        return await this.bookingService.getOne({ where: { botId, id } });
+    async getBookingById(@Param("botId") botId: string, @Param("phone") phone: string) {
+        return await this.bookingService.getOne({ where: { botId, phone } });
     }
 
     @Post(":botId")
@@ -25,19 +25,19 @@ export class BookingController {
         return await this.bookingService.save({ ...createBookingDto, botId });
     }
 
-    @Patch(":botId/:id")
+    @Patch(":botId/:phone")
     @HttpCode(HttpStatus.OK)
     async updateBooking(
         @Param("botId") botId: string,
-        @Param("id") id: string,
+        @Param("phone") phone: string,
         @Body() updateBookingDto: UpdateBookingDto,
     ) {
-        return await this.bookingService.updateBooking(botId, id, updateBookingDto);
+        return await this.bookingService.updateBooking(botId, phone, updateBookingDto);
     }
 
-    @Delete(":botId/:id")
+    @Delete(":botId/:phone")
     @HttpCode(HttpStatus.OK)
-    async deleteBooking(@Param("botId") botId: string, @Param("id") id: string) {
-        return await this.bookingService.deleteBooking(botId, id);
+    async deleteBooking(@Param("botId") botId: string, @Param("phone") phone: string) {
+        return await this.bookingService.deleteBooking(botId, phone);
     }
 }
