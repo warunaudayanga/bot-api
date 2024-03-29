@@ -1,6 +1,5 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, Unique } from "typeorm";
 import { BaseEntity } from "hichchi-nestjs-crud";
-import { Unique } from "typeorm/browser";
 
 @Entity("booking")
 @Unique(["botId", "phone"])
