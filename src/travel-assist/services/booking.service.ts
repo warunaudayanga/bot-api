@@ -18,6 +18,7 @@ export class BookingService extends CrudService<BookingEntity> {
     }
 
     async deleteBooking(botId: string, phone: string) {
-        if (await this.getOne({ where: { botId, phone } })) return await this.delete(phone);
+        const booking = await this.getOne({ where: { botId, phone } });
+        if (booking) return await this.delete(booking.id);
     }
 }
